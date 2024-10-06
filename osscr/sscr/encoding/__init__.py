@@ -1,3 +1,5 @@
-from .encoding import *
 from .sectional_encoding import *
-from .image_cutting import ImageCutter
+from .char_image import *
+from .cutting_directional_lines import *
+from .directional_encoding import *
+from .encoding import *

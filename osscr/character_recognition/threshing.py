@@ -1,7 +1,7 @@
-from ..image_detection.cv2_detection import CV2HSVThresher
+from cv2_detection import HSVThresher
 
 
-class CharacterHSVThresher(CV2HSVThresher):
+class CharacterHSVThresher(HSVThresher):
     
     default_hsv_ranges = [[(0, 0, 210), (180, 255, 255)]]
 

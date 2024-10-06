@@ -43,5 +43,5 @@ class LetterDecoder(Decoder):
     }
 
 
-class SymbolDecoder(Decoder):
+class CharacterDecoder(Decoder):
     codes = {**LetterDecoder.codes, **DigitDecoder.codes}

@@ -1,13 +1,13 @@
 # Optical Seven Segment Character Recognition
 
 from .character_recognition import (
-    UniversalCharacterRecognizer, CharacterRecognizerConfigurableByThresher,
-    CustomizableCharacterRecognizer, DisplayCharacterRecognizer, 
+    DisplayCharacterRecognizer, DisplayCharacterRecognizerWithDetector,
+    DisplayCharacterRecognizerWithThresher, ConfiguredDisplayCharacterRecognizer, 
     DisplayDigitRecognizer, DisplaySymbolRecognizer
 )
 from .optical_recognition import (
-    UniversalOpticalRecognizer, OpticalRecognizerConfigurableByThresher, 
-    CustomizableOpticalRecognizer, OpticalRecognizer, 
+    OpticalCharacterRecognizer, OpticalCharacterRecognizerWithDetector, 
+    OpticalCharacterRecognizerWithThresher, OpticalRecognizer, 
     OpticalDigitRecognizer, OpticalSymbolRecognizer
 )
 

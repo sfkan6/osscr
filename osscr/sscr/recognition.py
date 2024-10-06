@@ -1,35 +1,51 @@
-from .decoding import Decoder, DigitDecoder, LetterDecoder, SymbolDecoder
-from .encoding import UniversalEncoder, Encoder, DigitEncoder
+from .decoding import Decoder, DigitDecoder, LetterDecoder, CharacterDecoder
+from .encoding import CharImage, Encoder, DefaultEncoder
 
 
 class Recognizer:
-    def __init__(self, encoder: UniversalEncoder, decoder: Decoder):
+    def __init__(self, encoder: Encoder, decoder: Decoder) -> None:
         self.encoder = encoder
         self.decoder = decoder
         self.code = ""
 
-    def get_symbol(self, threshold_image):
-        self.code = self.encoder.get_code_by_image(threshold_image)
+    def get_char_by_image(self, image: CharImage) -> str|int:
+        self.code = self.encoder.get_code_by_image(image)
         return self.decoder.get_symbol_by_code(self.code)
 
 
-class DigitRecognizer(Recognizer):
-    def __init__(self):
-        super().__init__(DigitEncoder(), DigitDecoder())
+class DefaultRecognizer(Recognizer):
+    def __init__(self, decoder: Decoder) -> None:
+        super().__init__(DefaultEncoder(), decoder)
 
-class LetterRecognizer(Recognizer):
-    def __init__(self):
-        super().__init__(Encoder(), LetterDecoder())
+class LetterRecognizer(DefaultRecognizer):
+    def __init__(self) -> None:
+        super().__init__(LetterDecoder())
 
-class SymbolRecognizer(Recognizer):
+class DigitRecognizer(DefaultRecognizer):
+    def __init__(self) -> None:
+        super().__init__(DigitDecoder())
     
-    def __init__(self, decoder: Decoder):
-        super().__init__(DigitEncoder(), decoder)
+    def get_char_by_image(self, image: CharImage) -> str | int:
+        if self.is_digit_one(image):
+            return 1
+        return super().get_char_by_image(image)
+
+    def is_digit_one(self, image: CharImage) -> bool:
+        height, width = image.height, image.width
+        if height > width * 3:
+            return True
+        return False
+
+class CharacterRecognizer(DigitRecognizer):
+     
+    def __init__(self, decoder: Decoder) -> None:
+        super().__init__()
+        self.decoder = decoder
 
     @classmethod
     def create_by_default(cls):
-        return cls(SymbolDecoder())
+        return cls(CharacterDecoder())
 
     @classmethod
     def create_by_codes(cls, codes: dict):
-        return cls(SymbolDecoder.create_by_codes(codes))
+        return cls(CharacterDecoder.create_by_codes(codes))

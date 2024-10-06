@@ -1,2 +1,5 @@
-from .optical_recognition import *
-from .display_image_detection import *
+'''
+Not recommended!
+'''
+from .recognition import *
+from .image_detection import *
