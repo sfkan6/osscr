@@ -1,4 +1,4 @@
-from ..image_detection import ImageDetector, ImageDetector, Thresher, Detector, Image
+from ..image_detection import ImageDetector, Thresher, Detector, Image
 from .threshing import DisplayHSVThresher
 from .contour_processing import DisplayRectangleProcessor
 
